@@ -1,0 +1,319 @@
+{% extends "layouts/base.html" %}
+{% block title %} Dashboard {% endblock %}
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-chart">
+          <div class="card-header mb-2">
+            {% if messages %}
+              {% for message in messages %}
+                <div>
+                  <strong>{{message|safe}}</strong>
+                </div>
+              {% endfor %}
+            {% else %}
+            {{order}}
+            <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <div class="file-field input-field">
+            <div class="btn">
+            <span>Upload a CSV FILE</span><hr color="#FFF">
+            <input type="file" name="file">
+            </div>
+            <button class="waves-effect waves-light btn teal" type="submit">Upload</button>
+            </div>
+            </form>
+            {% endif %}
+
+            <div class="row">
+                <div class="col-sm-6 text-left mb-4">
+<!--                <h5 class="card-category">Total Shipments</h5>-->
+                <h2 class="card-title">Degree-4</h2>
+                  <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+
+                  <label class="btn btn-sm btn-primary btn-simple active" id="0">
+                    <input type="radio" name="options" checked>
+                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">degree-4</span>
+                    <span class="d-block d-sm-none">
+                      <i class="tim-icons icon-single-02"></i>
+                    </span>
+                  </label>
+                  <label class="btn btn-sm btn-primary btn-simple" id="1">
+                    <input type="radio" class="d-none d-sm-none" name="options">
+                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Accuracy[{{deg4_acc}}]</span>
+                    <span class="d-block d-sm-none">
+                      <i class="tim-icons icon-gift-2"></i>
+                    </span>
+                  </label>
+                  <label class="btn btn-sm btn-primary btn-simple" id="2">
+                    <input type="radio" class="d-none" name="options">
+                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Intercept[{{deg4_const}}]</span>
+                    <span class="d-block d-sm-none">
+                      <i class="tim-icons icon-tap-02"></i>
+                    </span>
+                  </label>
+                </div>
+                  <img src="data:image/png;base64, {{ deg4 }}">
+              </div>
+                <div class="col-sm-6 text-right">
+<!--                <h5 class="card-category">Total Shipments</h5>-->
+                <h2 class="card-title">Degree-3</h2>
+                  <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+
+                  <label class="btn btn-sm btn-primary btn-simple active" id="03">
+                    <input type="radio" name="options" checked>
+                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">degree-3</span>
+                    <span class="d-block d-sm-none">
+                      <i class="tim-icons icon-single-02"></i>
+                    </span>
+                  </label>
+                  <label class="btn btn-sm btn-primary btn-simple" id="13">
+                    <input type="radio" class="d-none d-sm-none" name="options">
+                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Accuracy[{{deg3_acc}}]</span>
+                    <span class="d-block d-sm-none">
+                      <i class="tim-icons icon-gift-2"></i>
+                    </span>
+                  </label>
+                  <label class="btn btn-sm btn-primary btn-simple" id="23">
+                    <input type="radio" class="d-none" name="options">
+                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Intercept[{{deg3_const}}]</span>
+                    <span class="d-block d-sm-none">
+                      <i class="tim-icons icon-tap-02"></i>
+                    </span>
+                  </label>
+                </div>
+                  <img src="data:image/png;base64, {{ deg3 }}">
+              </div>
+              </div>
+            </div>
+          </div>
+    </div>
+      <div class="col-12">
+        <div class="card card-chart">
+          <div class="card-header ">
+            <div class="row">
+              <div class="col-sm-6 text-left mb-4">
+<!--                <h5 class="card-category">Total Shipments</h5>-->
+                <h2 class="card-title">Degree-2</h2>
+                  <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                  <label class="btn btn-sm btn-primary btn-simple active" id="02">
+                    <input type="radio" name="options" checked>
+                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">degree-2</span>
+                    <span class="d-block d-sm-none">
+                      <i class="tim-icons icon-single-02"></i>
+                    </span>
+                  </label>
+                  <label class="btn btn-sm btn-primary btn-simple" id="12">
+                    <input type="radio" class="d-none d-sm-none" name="options">
+                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Accuracy[{{deg2_acc}}]</span>
+                    <span class="d-block d-sm-none">
+                      <i class="tim-icons icon-gift-2"></i>
+                    </span>
+                  </label>
+                  <label class="btn btn-sm btn-primary btn-simple" id="22">
+                    <input type="radio" class="d-none" name="options">
+                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Intercept[{{deg2_const}}]</span>
+                    <span class="d-block d-sm-none">
+                      <i class="tim-icons icon-tap-02"></i>
+                    </span>
+                  </label>
+                </div>
+                  <img src="data:image/png;base64, {{ deg2 }}">
+              </div>
+                <div class="col-sm-6 text-right">
+<!--                <h5 class="card-category">Total Shipments</h5>-->
+                <h2 class="card-title">Degree-1</h2>
+                  <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                  <label class="btn btn-sm btn-primary btn-simple active" id="01">
+                    <input type="radio" name="options" checked>
+                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">degree-1</span>
+                    <span class="d-block d-sm-none">
+                      <i class="tim-icons icon-single-02"></i>
+                    </span>
+                  </label>
+                  <label class="btn btn-sm btn-primary btn-simple" id="11">
+                    <input type="radio" class="d-none d-sm-none" name="options">
+                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Accuracy[{{deg1_acc}}]</span>
+                    <span class="d-block d-sm-none">
+                      <i class="tim-icons icon-gift-2"></i>
+                    </span>
+                  </label>
+                  <label class="btn btn-sm btn-primary btn-simple" id="21">
+                    <input type="radio" class="d-none" name="options">
+                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Intercept[{{deg1_const}}]</span>
+                    <span class="d-block d-sm-none">
+                      <i class="tim-icons icon-tap-02"></i>
+                    </span>
+                  </label>
+                </div>
+                  <img src="data:image/png;base64, {{ deg1 }}">
+              </div>
+             </div>
+            </div>
+          </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title"> Student Data(RealTime)</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+<!--              <input type="date" name="from_date">-->
+<!--              <input type="date" name="to_date">-->
+<!--              <input type="submit" class="btn-info" value="Search">-->
+                <table class="table table-bordered" id="tbl-1">
+                  <thead class=" text-primary">
+                    <tr>
+                      <th class="text-center">
+                        Name
+                      </th>
+                      <th class="text-center">
+                        Country
+                      </th>
+                      <th class="text-center">
+                        City
+                      </th>
+                      <th class="text-center">
+                        Salary
+                      </th>
+                      <th class="text-center">
+                        Created At
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for emp in users %}
+                    <tr>
+                      <td class="text-center">
+                        {{emp.name}}
+                      </td>
+                      <td class="text-center">
+                        {{emp.country}}
+                      </td>
+                      <td class="text-center">
+                        {{emp.city}}
+                      </td>
+                      <td class="text-center">
+                        {{emp.salary}}
+                      </td>
+                      <td class="text-center">
+                        {{emp.created_at}}
+                      </td>
+                    </tr>
+                  <!-- If object_list is empty  -->
+                  {% empty %}
+                    <li>Data Not found.</li>
+                  {% endfor %}
+                  </tbody>
+                </table>
+                {% if users.has_other_pages %}
+                  <ul class="pagination">
+                    {% if users.has_previous %}
+                      <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in users.paginator.page_range %}
+                      {% if users.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                      {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+                    {% if users.has_next %}
+                      <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                  </ul>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title"> Current Dataframe</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+<!--              <input type="date" name="from_date">-->
+<!--              <input type="date" name="to_date">-->
+<!--              <input type="submit" class="btn-info" value="Search">-->
+                <table class="table table-bordered" id="tbl-2">
+                  <thead class=" text-primary">
+                    <tr>
+                      <th class="text-center">
+                        id
+                      </th>
+                      <th class="text-center">
+                        X
+                      </th>
+                      <th class="text-center">
+                        Y
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for df in dataframe %}
+                    <tr>
+                      <td class="text-center">
+                        {{df.id}}
+                      </td>
+                      <td class="text-center">
+                        {{df.X}}
+                      </td>
+                      <td class="text-center">
+                        {{df.Y}}
+                      </td>
+                    </tr>
+                  <!-- If object_list is empty  -->
+                  {% empty %}
+                    <li>Data Not found.</li>
+                  {% endfor %}
+                  </tbody>
+                </table>
+                {% if users.has_other_pages %}
+                  <ul class="pagination">
+                    {% if users.has_previous %}
+                      <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in users.paginator.page_range %}
+                      {% if users.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                      {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+                    {% if users.has_next %}
+                      <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                  </ul>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+{% endblock content %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+  <script>
+    $(document).ready(function() {
+      // Javascript method's body can be found in assets/js/demos.js
+      demo.initDashboardPageCharts();
+
+    });
+  </script>
+{% endblock javascripts %}
