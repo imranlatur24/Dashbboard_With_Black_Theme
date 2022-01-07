@@ -7,6 +7,8 @@ from django.db import models
 from django.contrib.auth.models import User
 #for csv
 from django.contrib.auth.models import User
+from django.db.models.base import Model
+from numpy import mod
 
 class new_model(models.Model):
     # user=models.OneToOneField(User,on_delete=models.CASCADE)
@@ -42,4 +44,10 @@ class Employee(models.Model):
     city = models.CharField(max_length=65)
     salary = models.IntegerField()
     created_at = models.DateField(auto_now_add=True)
+
+class SyllabusPieModel(models.Model):
+    subject_name=models.CharField(max_length=20)
+    score=models.PositiveIntegerField()
+    colors=models.CharField(max_length=25,default='gray')
+    explode=models.PositiveIntegerField()
 

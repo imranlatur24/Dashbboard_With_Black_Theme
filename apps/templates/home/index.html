@@ -154,6 +154,7 @@
           </div>
     </div>
 
+    <!-- student data in table format -->
     <div class="row">
       <div class="col-sm-8">
         <div class="card">
@@ -305,7 +306,80 @@
       </div>
 
     </div>
+
+    <!-- pie chart -->
+    <div class="col-md-offset-12 center-block">
+      <div class="card">
+            <div class="card-header">
+              <h4 class="card-title text-md-center">Std-XII Remain Syllabus</h4>
+            </div>
+            <div class="card-body">
+              <img src="data:image/png;base64, {{ pie_chart_url }}">
+            </div>
+          <!-- </div>
+          </div>
+        </div>          
+      </div> -->    
     </div>
+
+   <!-- small graphs -->
+   
+  <div class="row">
+      <div class="col-sm-6">
+        <div class="card">
+        <div class="card-header">
+          <h4 class="card-title text-md-center">English</h4>
+        </div>
+        <div class="card-body">
+          <img src="data:image/png;base64, {{ pie_chart_english }}">
+        </div>
+      </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="card">
+        <div class="card-header">
+          <h4 class="card-title text-md-center">Mathmatics</h4>
+        </div>
+        <div class="card-body">
+          <img src="data:image/png;base64, {{ pie_chart_math }}">
+        </div>
+      </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-sm-6">
+        <div class="card">
+        <div class="card-header">
+          <h4 class="card-title text-md-center">Biology</h4>
+        </div>
+        <div class="card-body">
+          <img src="data:image/png;base64, {{ pie_chart_biology }}">
+        </div>
+      </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="card">
+        <div class="card-header">
+          <h4 class="card-title text-md-center">Chemistry</h4>
+        </div>
+        <div class="card-body">
+          <img src="data:image/png;base64, {{ pie_chart_chemistry }}">
+        </div>
+      </div>
+      </div>
+  </div>
+    </div>
+    </div>
+  </div>
+  <!-- ------------------------------------------------------------------------------------------------------ -->
+
+
+
+
+
+
 {% endblock content %}
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}

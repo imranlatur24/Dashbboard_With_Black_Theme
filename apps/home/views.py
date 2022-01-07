@@ -1,10 +1,11 @@
 # -*- encoding: utf-8 -*-
+from re import sub
 from django import template
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
-from .models import Employee,new_model
+from .models import Employee,new_model,SyllabusPieModel
 from django.shortcuts import render,redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 #for csv
@@ -216,6 +217,96 @@ def index(request):
         plt.close()
         img.seek(0)
         plot_url = base64.b64encode(img.getvalue()).decode('utf8')
+        #############################################################################
+        #for pie-chart
+        img = io.BytesIO()  ################
+        # Data to plot
+        subject_name = SyllabusPieModel.objects.values_list('subject_name', flat=True).order_by('subject_name')
+        score = SyllabusPieModel.objects.values_list('score', flat=True).order_by('score')
+        colors = SyllabusPieModel.objects.values_list('colors', flat=True).order_by('colors')
+        explode = SyllabusPieModel.objects.values_list('explode', flat=True).order_by('explode')
+        explode=tuple(explode)
+        #convert queryset into list
+        subject_name=list(subject_name)
+        score=list(score)
+        colors=list(colors)
+        print('###score ',score)
+        print('###score type ',type(score))
+        # score = SyllabusModel.objects.filter('score')
+        # print('###score ',score)
+        labels = subject_name
+        sizes = score
+        colors = colors
+        # explode = (0.1, 0, 0, 0,0)  # explode 1st slice
+        explode = explode  # explode 1st slice
+        # Plot
+        plt.pie(sizes, explode=explode, labels=labels, colors=colors,
+        autopct='%1.1f%%', shadow=True, startangle=140)
+        plt.axis('equal')
+        plt.savefig(img, format='png')
+        plt.close()
+        img.seek(0)
+        pie_chart_url = base64.b64encode(img.getvalue()).decode('utf8')
+        ##########################################################################
+
+        #for small pie-charts
+        img = io.BytesIO()  ################
+        labels = 'Remains', 'Completed'
+        sizes = [53,47]
+        colors = ['lightgreen', 'pink']
+        explode = (0.1, 0,)  # explode 1st slice
+        # Plot
+        plt.pie(sizes, explode=explode, labels=labels, colors=colors,
+        autopct='%1.1f%%', shadow=True, startangle=140)
+        plt.axis('equal')
+        plt.savefig(img, format='png')
+        plt.close()
+        img.seek(0)
+        pie_chart_english = base64.b64encode(img.getvalue()).decode('utf8')
+        #########################################################################
+        img = io.BytesIO()  ################
+        labels = 'Remains', 'Completed'
+        sizes = [15,85]
+        colors = ['lightgreen', 'yellowgreen']
+        explode = (0.1, 0,)  # explode 1st slice
+            # Plot
+        plt.pie(sizes, explode=explode, labels=labels, colors=colors,
+        autopct='%1.1f%%', shadow=True, startangle=140)
+        plt.axis('equal')
+        plt.savefig(img, format='png')
+        plt.close()
+        img.seek(0)
+        pie_chart_math = base64.b64encode(img.getvalue()).decode('utf8')
+            
+        img = io.BytesIO()  ################
+        labels = 'Remains', 'Completed'
+        sizes = [15,85]
+        colors = ['lightgreen', 'gold']
+        explode = (0.1, 0,)  # explode 1st slice
+            # Plot
+        plt.pie(sizes, explode=explode, labels=labels, colors=colors,
+        autopct='%1.1f%%', shadow=True, startangle=140)
+        plt.axis('equal')
+        plt.savefig(img, format='png')
+        plt.close()
+        img.seek(0)
+        pie_chart_biology = base64.b64encode(img.getvalue()).decode('utf8')
+        #########################################################################
+        img = io.BytesIO()  ################
+        labels = 'Remains', 'Completed'
+        sizes = [55,45]
+        colors = ['lightgreen', 'gray']
+        explode = (0.1, 0,)  # explode 1st slice
+            # Plot
+        plt.pie(sizes, explode=explode, labels=labels, colors=colors,
+        autopct='%1.1f%%', shadow=True, startangle=140)
+        plt.axis('equal')
+        plt.savefig(img, format='png')
+        plt.close()
+        img.seek(0)
+        pie_chart_chemistry = base64.b64encode(img.getvalue()).decode('utf8')
+ 
+
         #pagination
         context = {'segment': 'index'}
         queryset = Employee.objects.all().order_by('name')
@@ -235,7 +326,11 @@ def index(request):
                            'deg3_acc':deg3_acc,'deg3_const':deg3_const,
                            'deg4_acc':deg4_acc,'deg4_const':deg4_const,
                            'deg4': plot_url, 'deg3': plot_url3, 'deg2': plot_url2,
-                           'deg1': plot_url1})
+                           'deg1': plot_url1,'pie_chart_url':pie_chart_url,
+                           'pie_chart_biology':pie_chart_biology,
+                           'pie_chart_english':pie_chart_english,
+                           'pie_chart_math':pie_chart_math,
+                           'pie_chart_chemistry':pie_chart_chemistry})
         csv_file = request.FILES['file']
         print('filename ', csv_file)
         csv_file = request.FILES['file']
@@ -323,7 +418,7 @@ def pages(request):
             return HttpResponseRedirect(reverse('admin:index'))
         context['segment'] = load_template
 
-        html_template = loader.get_template('home/' + load_template)
+        html_template = loader.get_template('index/' + load_template)
         return HttpResponse(html_template.render(context, request))
 
     except template.TemplateDoesNotExist:

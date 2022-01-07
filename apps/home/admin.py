@@ -4,7 +4,7 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from django.contrib import admin
-from .models import Employee,new_model
+from .models import Employee,new_model,SyllabusPieModel
 # Register your models here.
 
 @admin.register(Employee)
@@ -18,3 +18,5 @@ class CsvAdmin(admin.ModelAdmin):
     #                 'deg3_x3', 'deg3_accuracy', 'deg3_intercept', 'deg4_x0', 'deg4_x1', 'deg4_x2', 'deg4_x3', 'deg4_x4',
     #                  'deg4_accuracy', 'deg4_intercept']
     list_display2 = ['id', 'X', 'Y']
+
+admin.site.register(SyllabusPieModel)
